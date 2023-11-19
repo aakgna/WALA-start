@@ -18,6 +18,8 @@ repositories {
 dependencies {
     def walaVersion = '1.6.0'
 
+    implementation 'com.google.code.gson:gson:2.8.6'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.2'
     implementation "com.ibm.wala:com.ibm.wala.shrike:${walaVersion}"
     implementation "com.ibm.wala:com.ibm.wala.util:${walaVersion}"
     implementation "com.ibm.wala:com.ibm.wala.core:${walaVersion}"

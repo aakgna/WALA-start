@@ -1,8 +1,10 @@
 package com.ibm.wala.examples.drivers;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Properties;
 
+import com.google.gson.Gson;
 import com.ibm.wala.core.util.config.AnalysisScopeReader;
 import com.ibm.wala.core.util.warnings.Warnings;
 import com.ibm.wala.dataflow.IFDS.ISupergraph;
@@ -58,6 +60,13 @@ public class CSReachingDefsDriver {
 	      throw new IllegalArgumentException("must specify main class");
 	    }
 	    AnalysisScope scope = AnalysisScopeReader.instance.readJavaScope(scopeFile, null, CSReachingDefsDriver.class.getClassLoader());
+
+		Gson gson = new Gson();
+		String json_format = gson.toJson(scope.toString());
+		FileWriter writer = new FileWriter("/Users/aakgna/Documents/WALA-Research/WALA-start/output2.json");
+		writer.write(json_format);
+		writer.close();
+
 	    ExampleUtil.addDefaultExclusions(scope);
 	    IClassHierarchy cha = ClassHierarchyFactory.make(scope);
 	    System.out.println(cha.getNumberOfClasses() + " classes");

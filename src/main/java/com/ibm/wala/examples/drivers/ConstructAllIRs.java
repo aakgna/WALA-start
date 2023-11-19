@@ -10,7 +10,9 @@
  *******************************************************************************/
 package com.ibm.wala.examples.drivers;
 
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.LinkedList;
 
 import com.ibm.wala.classLoader.IClass;
 import com.ibm.wala.classLoader.IMethod;
@@ -25,6 +27,8 @@ import com.ibm.wala.ipa.cha.ClassHierarchy;
 import com.ibm.wala.ipa.cha.ClassHierarchyException;
 import com.ibm.wala.ipa.cha.ClassHierarchyFactory;
 import com.ibm.wala.util.perf.Stopwatch;
+
+import com.google.gson.Gson;
 
 /**
  * An analysis skeleton that simply constructs IRs for all methods in a class hierarchy. Illustrates the use of
@@ -60,6 +64,18 @@ public class ConstructAllIRs {
     Stopwatch s = new Stopwatch();
     s.start();
     AnalysisScope scope = AnalysisScopeReader.instance.readJavaScope(scopeFile, null, ConstructAllIRs.class.getClassLoader());
+
+    LinkedList<String> statesList = new LinkedList<>();
+    statesList.add("California");
+    statesList.add("Washington");
+    statesList.add("Arizona");
+    statesList.add("New York");
+    statesList.add("Oregon");
+    Gson gson = new Gson();
+    String f = gson.toJson(statesList);
+    FileWriter writer = new FileWriter("/Users/aakgna/Documents/WALA-Research/WALA-start/out.json");
+    writer.write(f);
+    writer.close();
 
     // build a type hierarchy
     System.out.print("building class hierarchy...");
